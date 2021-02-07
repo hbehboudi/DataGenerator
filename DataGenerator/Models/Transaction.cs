@@ -1,5 +1,6 @@
 ﻿using Nest;
 using System;
+using System.Text;
 
 namespace DataGenerator.Models
 {
@@ -50,6 +51,21 @@ namespace DataGenerator.Models
             State = state;
             IssueTracking = issueTracking;
             Amount = amount;
+        }
+
+        public string ToString()
+        {
+            var stringBuilder = new StringBuilder();
+            var s = ";";
+            
+            stringBuilder.Append(SourceId).Append(s);
+            stringBuilder.Append(TargetId).Append(s);
+            stringBuilder.Append(IssueTracking).Append(s);
+            stringBuilder.Append(Amount).Append(s);
+            stringBuilder.Append(Date).Append(s);
+            stringBuilder.Append(State);
+
+            return stringBuilder.ToString();
         }
     }
 }

@@ -1,6 +1,5 @@
-﻿using DataGenerator.Configurations;
-using Nest;
-using System;
+﻿using DataGenerator.Generators;
+using System.IO;
 
 namespace DataGenerator
 {
@@ -8,21 +7,26 @@ namespace DataGenerator
     {
         public static void Main(string[] args)
         {
-            var url = new Uri("http://localhost:9200/");
-            var settings = new ConnectionSettings(url).DefaultIndex("visual_query_framework_test_2");
-            var client = new ElasticClient(settings);
+            var cards = new CardGenerator().GetCards(1000);
 
-            var writeConfig = new WriteConfig()
+            using (var file = new StreamWriter(@"C:\Users\Hossein\Desktop\A.csv"))
             {
-                CardBulkSize = 100_000,
-                TransactionBulkSize = 100_000,
-                NumberOfCardBulk = 1,
-                NumberOfTransactionBulk = 1
-            };
+                foreach (var card in cards)
+                {
+                    file.WriteLine(card.ToString());
+                }
+            }
 
-            var importer = new Importer(writeConfig);
+            var transactions = new TransactionGenerator(1000).GetTransactions(20_000);
 
-            importer.Import(client);
+            using (var file2 = new StreamWriter(@"C:\Users\Hossein\Desktop\B.csv"))
+            {
+                foreach (var transaction in transactions)
+                {
+                    file2.WriteLine(transaction.ToString());
+                }
+            }
+
         }
     }
 }

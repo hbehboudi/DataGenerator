@@ -1,5 +1,6 @@
 ﻿using Nest;
 using System;
+using System.Text;
 
 namespace DataGenerator.Models
 {
@@ -57,6 +58,25 @@ namespace DataGenerator.Models
             CardNumber = cardNumber;
             AccountNumber = accountNumber;
             Iban = iban;
+        }
+
+        public string ToString()
+        {
+            var stringBuilder = new StringBuilder();
+            var s = ";";
+
+            stringBuilder.Append(Id).Append(s);
+            stringBuilder.Append(AccountNumber).Append(s);
+            stringBuilder.Append(CardNumber).Append(s);
+            stringBuilder.Append(Iban).Append(s);
+            stringBuilder.Append(BranchCode).Append(s);
+            stringBuilder.Append(BranchPhoneNumber).Append(s);
+            stringBuilder.Append(BankName).Append(s);
+            stringBuilder.Append(BranchName).Append(s);
+            stringBuilder.Append(BranchAddress).Append(s);
+            stringBuilder.Append(AccountType).Append(s);
+
+            return stringBuilder.ToString();
         }
     }
 }
