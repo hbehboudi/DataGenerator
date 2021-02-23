@@ -2,7 +2,7 @@
 
 namespace DataGenerator.Extensions
 {
-    public static class ConvertExtension
+    internal static class ConvertExtension
     {
         public static Guid ToGuid(this long value)
         {
@@ -11,9 +11,6 @@ namespace DataGenerator.Extensions
             return new Guid(bytes);
         }
         
-        public static Guid ToGuid(this int value)
-        {
-            return ToGuid((long) value);
-        }
+        public static Guid ToGuid(this int value) => ToGuid((long) value);
     }
 }

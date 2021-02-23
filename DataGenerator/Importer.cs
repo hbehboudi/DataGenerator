@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace DataGenerator
 {
-    public class Importer
+    internal class Importer
     {
         private readonly WriteConfig writeConfig;
         private readonly CardGenerator cardGenerator;
@@ -34,7 +34,7 @@ namespace DataGenerator
             }
         }
 
-        public void InsertCards(IEnumerable<Card> cards, ElasticClient client)
+        private void InsertCards(IEnumerable<Card> cards, ElasticClient client)
         {
             var descriptor = new BulkDescriptor();
 
@@ -46,7 +46,7 @@ namespace DataGenerator
             var result = client.Bulk(descriptor);
         }
 
-        public void InsertTransactions(IEnumerable<Transaction> transactions, ElasticClient client)
+        private void InsertTransactions(IEnumerable<Transaction> transactions, ElasticClient client)
         {
             var descriptor = new BulkDescriptor();
 

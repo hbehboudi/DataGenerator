@@ -3,7 +3,7 @@ using System;
 
 namespace DataGenerator.Models
 {
-    public class Transaction
+    internal class Transaction
     {
         [Text(Name = "id")]
         public Guid Id { get; set; }

@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using DataGenerator.ConstValues;
 using DataGenerator.Extensions;
 using DataGenerator.Models;
 
 namespace DataGenerator.Generators
 {
-    public class CardGenerator
+    internal class CardGenerator
     {
         private static long id = -1;
         private readonly Random random = new Random();
@@ -17,14 +18,16 @@ namespace DataGenerator.Generators
 
             for (int i = 0; i < count; i++)
             {
-                cards.Add(GetCard(bankGenerator.GetRandomBranch()));
+                cards.Add(GetCard());
             }
 
             return cards;
         }
 
-        private Card GetCard(Branch bankBranch)
+        private Card GetCard()
         {
+            var bankBranch = bankGenerator.GetRandomBranch();
+
             var id = GetId();
             var accountType = GetAccountType();
             var accountNumber = GetAccountNumber(id);
@@ -59,33 +62,32 @@ namespace DataGenerator.Generators
         {
             switch (bankName)
             {
-                case "پارسیان":
-                    return "622106";
-                case "رسالت":
-                    return "504172";
-                case "سامان":
-                    return "621986";
-                case "سپه":
-                    return "589210";
-                case "سینا":
-                    return "639346";
-                case "شهر":
-                    return "502806";
-                case "صادرات":
-                    return "603769";
-                case "قوامین":
-                    return "639599";
-                case "کشاورزی":
-                    return "603770";
-                case "مسکن":
-                    return "628023";
-                case "ملت":
-                    return "610433";
-                case "ملی":
-                    return "603799";
+                case BankNameConstValues.Parsian:
+                    return CardCodeConstValues.Parsian;
+                case BankNameConstValues.Resalat:
+                    return CardCodeConstValues.Resalat;
+                case BankNameConstValues.Saman:
+                    return CardCodeConstValues.Saman;
+                case BankNameConstValues.Sepah:
+                    return CardCodeConstValues.Sepah;
+                case BankNameConstValues.Sina:
+                    return CardCodeConstValues.Sina;
+                case BankNameConstValues.Shahr:
+                    return CardCodeConstValues.Shahr;
+                case BankNameConstValues.Saderat:
+                    return CardCodeConstValues.Saderat;
+                case BankNameConstValues.Ghavamin:
+                    return CardCodeConstValues.Ghavamin;
+                case BankNameConstValues.Keshavarzi:
+                    return CardCodeConstValues.Keshavarzi;
+                case BankNameConstValues.Maskan:
+                    return CardCodeConstValues.Maskan;
+                case BankNameConstValues.Mellat:
+                    return CardCodeConstValues.Mellat;
+                case BankNameConstValues.Melli:
+                    return CardCodeConstValues.Melli;
+                default: throw new NotImplementedException();
             }
-
-            throw new NotImplementedException();
         }
 
         public string GetAccountType()
@@ -93,25 +95,19 @@ namespace DataGenerator.Generators
             switch (random.Next(3))
             {
                 case 0:
-                    return "جاری";
+                    return AccountTypeConstValues.CurrentAccount;
                 case 1:
-                    return "سپرده";
+                    return AccountTypeConstValues.DepositAccount;
                 case 2:
-                    return "پس انداز";
+                    return AccountTypeConstValues.SavingAccount;
+                default:
+                    throw new NotImplementedException();
             }
-
-            throw new NotImplementedException();
         }
 
         private string GetRandomStringNumber(int size)
         {
-            int maxValue = 1;
-
-            for (int i = 0; i < size; i++)
-            {
-                maxValue *= 10;
-            }
-
+            var maxValue = (int)Math.Pow(10, size);
             return random.Next(maxValue).Expand(size);
         }
     }

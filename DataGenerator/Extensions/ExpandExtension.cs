@@ -1,6 +1,6 @@
 ﻿namespace DataGenerator.Extensions
 {
-    public static class ExpandExtension
+    internal static class ExpandExtension
     {
         public static string Expand(this string str, int size)
         {
@@ -12,14 +12,10 @@
             return str;
         }
 
-        public static string Expand(this long num, int size)
-        {
-            return Expand(num.ToString(), size);
-        }
+        public static string Expand(this long num, int size) =>
+            Expand(num.ToString(), size);
 
-        public static string Expand(this int num, int size)
-        {
-            return Expand(num.ToString(), size);
-        }
+        public static string Expand(this int num, int size) =>
+            Expand(num.ToString(), size);
     }
 }

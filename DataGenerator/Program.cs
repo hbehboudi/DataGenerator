@@ -1,6 +1,7 @@
 ﻿using DataGenerator.Configurations;
 using Nest;
 using System;
+using System.Configuration;
 
 namespace DataGenerator
 {
@@ -8,8 +9,9 @@ namespace DataGenerator
     {
         public static void Main(string[] args)
         {
-            var url = new Uri("http://localhost:9200/");
-            var settings = new ConnectionSettings(url).DefaultIndex("visual_query_framework_test_2");
+            var url = new Uri(ConfigurationManager.AppSettings["ElasticUrl"]);
+            var indexName = ConfigurationManager.AppSettings["ElasticIndexName"];
+            var settings = new ConnectionSettings(url).DefaultIndex(indexName);
             var client = new ElasticClient(settings);
 
             var writeConfig = new WriteConfig()
@@ -21,7 +23,6 @@ namespace DataGenerator
             };
 
             var importer = new Importer(writeConfig);
-
             importer.Import(client);
         }
     }

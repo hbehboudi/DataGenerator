@@ -1,6 +1,6 @@
 ﻿namespace DataGenerator.Models
 {
-    public class Branch
+    internal class Branch
     {
         public int Code { get; set; }
         public string BankName { get; private set; }

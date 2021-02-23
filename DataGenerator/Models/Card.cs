@@ -3,7 +3,7 @@ using System;
 
 namespace DataGenerator.Models
 {
-    public class Card
+    internal class Card
     {
         [Text(Name = "id")]
         public Guid Id { get; set; }

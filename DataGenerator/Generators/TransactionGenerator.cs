@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace DataGenerator.Generators
 {
-    public class TransactionGenerator
+    internal class TransactionGenerator
     {
         private static long id = 999_999_999;
         private readonly Random random = new Random();

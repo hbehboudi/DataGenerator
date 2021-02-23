@@ -1,6 +1,6 @@
 ﻿namespace DataGenerator.Configurations
 {
-    public class WriteConfig
+    internal class WriteConfig
     {
         public int NumberOfCardBulk { get; set; }
         public int NumberOfTransactionBulk { get; set; }
